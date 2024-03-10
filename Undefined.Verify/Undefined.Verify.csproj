@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>preview</LangVersion>
+        <Version>1.0.0</Version>
+        <Title>Verify</Title>
+        <Description>Just a small util for sending errors.</Description>
+        <Copyright>Copyright © LunarLife 2023</Copyright>
+        <PackageProjectUrl>https://github.com/lunarlife/Undefined.Verify</PackageProjectUrl>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/lunarlife/Undefined.Verify</RepositoryUrl>
+        <RepositoryType>https://github.com/lunarlife/Undefined.Verify</RepositoryType>
+        <PackageTags>events event undefined</PackageTags>
+        <TargetFrameworks>net9.0;net6.0;net7.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../LICENSE.txt" Pack="true" PackagePath=""/>
+        <None Include="../README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+</Project>
