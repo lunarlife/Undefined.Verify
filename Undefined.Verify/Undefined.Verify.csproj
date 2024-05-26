@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="xcopy /y /d  &quot;$(ProjectDir)$(OutDir)\Undefined.Verify.dll&quot; &quot;C:\Frameworks&quot;" />
+        <Exec Command="xcopy /y /d  &quot;$(ProjectDir)$(OutDir)\Undefined.Verify.dll&quot; &quot;C:\Frameworks&quot;"/>
     </Target>
 
 </Project>

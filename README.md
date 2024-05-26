@@ -1,4 +1,5 @@
 EXAMPLE:
+
 ```csharp
 object? obj = new();
 Verify.NotNull(obj); //No error

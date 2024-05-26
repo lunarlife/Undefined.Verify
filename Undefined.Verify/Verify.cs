@@ -19,8 +19,18 @@ public static class Verify
             throw new ArgumentException(message);
     }
 
+
+    private static bool TryClamp(int value, int min, int max) =>
+        value == (value < min ? min : value > max ? max : value);
+
+    private static bool TryClamp(float value, float min, float max) =>
+        value.Equals(value < min ? min : value > max ? max : value);
+
+    private static bool TryClamp(double value, double min, double max) =>
+        value.Equals(value < min ? min : value > max ? max : value);
+
 #if NET7_0_OR_GREATER
-    public static void Range<T>(T value, T min, T max, Action<T> action, string? message = null) where T : INumber<T>
+    public static void Range<T>(T value, T min, T max, Action<T> action, string message) where T : INumber<T>
     {
         if (!TryClamp(value, min, max))
         {
@@ -29,7 +39,7 @@ public static class Verify
         }
     }
 
-    public static void Range<T>(T value, T max, Action<T> action, string? message = null) where T : INumber<T>
+    public static void Range<T>(T value, T max, Action<T> action, string message) where T : INumber<T>
     {
         if (!TryClamp(value, T.Zero, max))
         {
@@ -38,7 +48,7 @@ public static class Verify
         }
     }
 
-    public static void RangeArray<T>(T value, T max, Action<T> action, string? message = null) where T : INumber<T>
+    public static void RangeArray<T>(T value, T max, Action<T> action, string message) where T : INumber<T>
     {
         if (!TryClamp(value, T.Zero, max - T.One))
         {
@@ -47,7 +57,7 @@ public static class Verify
         }
     }
 
-    public static void Min<T>(T value, T min, Action<T> action, string? message = null) where T : INumber<T>
+    public static void Min<T>(T value, T min, Action<T> action, string message) where T : INumber<T>
     {
         if (value < min)
         {
@@ -56,7 +66,7 @@ public static class Verify
         }
     }
 
-    public static void Max<T>(T value, T min, Action<T> action, string? message = null) where T : INumber<T>
+    public static void Max<T>(T value, T min, Action<T> action, string message) where T : INumber<T>
     {
         if (value > min)
         {
@@ -65,7 +75,7 @@ public static class Verify
         }
     }
 
-    public static void MoreThanZero<T>(T value, Action<T> action, string? message = null) where T : INumber<T>
+    public static void MoreThanZero<T>(T value, Action<T> action, string message) where T : INumber<T>
     {
         if (value < T.Zero)
         {
@@ -74,6 +84,35 @@ public static class Verify
         }
     }
 
+    public static void Range<T>(T value, T min, T max, Action<T> action) where T : INumber<T>
+    {
+        if (!TryClamp(value, min, max)) action(value);
+    }
+
+    public static void Range<T>(T value, T max, Action<T> action) where T : INumber<T>
+    {
+        if (!TryClamp(value, T.Zero, max)) action(value);
+    }
+
+    public static void RangeArray<T>(T value, T max, Action<T> action) where T : INumber<T>
+    {
+        if (!TryClamp(value, T.Zero, max - T.One)) action(value);
+    }
+
+    public static void Min<T>(T value, T min, Action<T> action) where T : INumber<T>
+    {
+        if (value < min) action(value);
+    }
+
+    public static void Max<T>(T value, T min, Action<T> action) where T : INumber<T>
+    {
+        if (value > min) action(value);
+    }
+
+    public static void MoreThanZero<T>(T value, Action<T> action) where T : INumber<T>
+    {
+        if (value < T.Zero) action(value);
+    }
 
     public static void Range<T>(T value, T min, T max, string? arg = null) where T : INumber<T>
     {
@@ -218,7 +257,7 @@ public static class Verify
 
     #region Actions6.0
 
-    public static void Range(int value, int min, int max, Action<int> action, string? message = null)
+    public static void Range(int value, int min, int max, Action<int> action, string message)
     {
         if (!TryClamp(value, min, max))
         {
@@ -227,7 +266,7 @@ public static class Verify
         }
     }
 
-    public static void Range(float value, float min, float max, Action<float> action, string? message = null)
+    public static void Range(float value, float min, float max, Action<float> action, string message)
     {
         if (!TryClamp(value, min, max))
         {
@@ -236,7 +275,7 @@ public static class Verify
         }
     }
 
-    public static void Range(double value, double min, double max, Action<double> action, string? message = null)
+    public static void Range(double value, double min, double max, Action<double> action, string message)
     {
         if (!TryClamp(value, min, max))
         {
@@ -245,7 +284,7 @@ public static class Verify
         }
     }
 
-    public static void Range(int value, int max, Action<int> action, string? message = null)
+    public static void Range(int value, int max, Action<int> action, string message)
     {
         if (!TryClamp(value, 0, max))
         {
@@ -254,7 +293,7 @@ public static class Verify
         }
     }
 
-    public static void Range(double value, double max, Action<double> action, string? message = null)
+    public static void Range(double value, double max, Action<double> action, string message)
     {
         if (!TryClamp(value, 0, max))
         {
@@ -263,7 +302,7 @@ public static class Verify
         }
     }
 
-    public static void Range(float value, float max, Action<float> action, string? message = null)
+    public static void Range(float value, float max, Action<float> action, string message)
     {
         if (!TryClamp(value, 0, max))
         {
@@ -272,7 +311,7 @@ public static class Verify
         }
     }
 
-    public static void RangeArray(int value, int max, Action<int> action, string? message = null)
+    public static void RangeArray(int value, int max, Action<int> action, string message)
     {
         if (!TryClamp(value, 0, max - 1))
         {
@@ -281,7 +320,7 @@ public static class Verify
         }
     }
 
-    public static void Min(int value, int min, Action<int> action, string? message = null)
+    public static void Min(int value, int min, Action<int> action, string message)
     {
         if (value < min)
         {
@@ -290,7 +329,7 @@ public static class Verify
         }
     }
 
-    public static void Min(float value, float min, Action<float> action, string? message = null)
+    public static void Min(float value, float min, Action<float> action, string message)
     {
         if (value < min)
         {
@@ -299,7 +338,7 @@ public static class Verify
         }
     }
 
-    public static void Min(double value, double min, Action<double> action, string? message = null)
+    public static void Min(double value, double min, Action<double> action, string message)
     {
         if (value < min)
         {
@@ -308,7 +347,7 @@ public static class Verify
         }
     }
 
-    public static void Max(int value, int max, Action<int> action, string? message = null)
+    public static void Max(int value, int max, Action<int> action, string message)
     {
         if (value > max)
         {
@@ -317,7 +356,7 @@ public static class Verify
         }
     }
 
-    public static void Max(float value, float max, Action<float> action, string? message = null)
+    public static void Max(float value, float max, Action<float> action, string message)
     {
         if (value > max)
         {
@@ -326,7 +365,7 @@ public static class Verify
         }
     }
 
-    public static void Max(double value, double max, Action<double> action, string? message = null)
+    public static void Max(double value, double max, Action<double> action, string message)
     {
         if (value > max)
         {
@@ -335,7 +374,7 @@ public static class Verify
         }
     }
 
-    public static void MoreThanZero(int value, Action<int> action, string? message = null)
+    public static void MoreThanZero(int value, Action<int> action, string message)
     {
         if (value < 0)
         {
@@ -344,7 +383,7 @@ public static class Verify
         }
     }
 
-    public static void MoreThanZero(float value, Action<float> action, string? message = null)
+    public static void MoreThanZero(float value, Action<float> action, string message)
     {
         if (value < 0)
         {
@@ -353,24 +392,110 @@ public static class Verify
         }
     }
 
-    public static void MoreThanZero(double value, Action<double> action, string? message = null)
+    public static void MoreThanZero(double value, Action<double> action, string message)
     {
         if (value < 0)
         {
             action(value);
             throw new ArgumentException(message);
         }
+    }
+
+    public static void Range(int value, int min, int max, Action<int> action)
+    {
+        if (!TryClamp(value, min, max))
+            action(value);
+    }
+
+    public static void Range(float value, float min, float max, Action<float> action)
+    {
+        if (!TryClamp(value, min, max))
+            action(value);
+    }
+
+    public static void Range(double value, double min, double max, Action<double> action)
+    {
+        if (!TryClamp(value, min, max))
+            action(value);
+    }
+
+    public static void Range(int value, int max, Action<int> action)
+    {
+        if (!TryClamp(value, 0, max))
+            action(value);
+    }
+
+    public static void Range(double value, double max, Action<double> action)
+    {
+        if (!TryClamp(value, 0, max))
+            action(value);
+    }
+
+    public static void Range(float value, float max, Action<float> action)
+    {
+        if (!TryClamp(value, 0, max))
+            action(value);
+    }
+
+    public static void RangeArray(int value, int max, Action<int> action)
+    {
+        if (!TryClamp(value, 0, max - 1))
+            action(value);
+    }
+
+    public static void Min(int value, int min, Action<int> action)
+    {
+        if (value < min)
+            action(value);
+    }
+
+    public static void Min(float value, float min, Action<float> action)
+    {
+        if (value < min)
+            action(value);
+    }
+
+    public static void Min(double value, double min, Action<double> action)
+    {
+        if (value < min)
+            action(value);
+    }
+
+    public static void Max(int value, int max, Action<int> action)
+    {
+        if (value > max)
+            action(value);
+    }
+
+    public static void Max(float value, float max, Action<float> action)
+    {
+        if (value > max)
+            action(value);
+    }
+
+    public static void Max(double value, double max, Action<double> action)
+    {
+        if (value > max)
+            action(value);
+    }
+
+    public static void MoreThanZero(int value, Action<int> action)
+    {
+        if (value < 0)
+            action(value);
+    }
+
+    public static void MoreThanZero(float value, Action<float> action)
+    {
+        if (value < 0)
+            action(value);
+    }
+
+    public static void MoreThanZero(double value, Action<double> action)
+    {
+        if (value < 0)
+            action(value);
     }
 
     #endregion
-
-
-    private static bool TryClamp(int value, int min, int max) =>
-        value == (value < min ? min : value > max ? max : value);
-
-    private static bool TryClamp(float value, float min, float max) =>
-        value.Equals(value < min ? min : value > max ? max : value);
-
-    private static bool TryClamp(double value, double min, double max) =>
-        value.Equals(value < min ? min : value > max ? max : value);
 }
