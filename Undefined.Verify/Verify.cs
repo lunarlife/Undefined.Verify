@@ -4,10 +4,10 @@ namespace Undefined.Verify;
 
 public static class Verify
 {
-    public static void RangeArray(Array array, int index, string? arg = null)
+    public static void RangeArray(Array array, int index, string? message = null)
     {
         if (!TryClamp(index, 0, array.Length - 1))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
     public static T NotNull<T>(T? obj, string? message = null) =>
@@ -16,6 +16,31 @@ public static class Verify
     public static void Argument(bool value, string? message = null)
     {
         if (!value)
+            throw new ArgumentException(message);
+    }
+
+    public static void Argument(bool value, Action action, string message)
+    {
+        if (value) return;
+        action();
+        throw new ArgumentException(message);
+    }
+
+    public static void Argument(bool value, Action action)
+    {
+        if (!value)
+            action();
+    }
+
+    public static void Argument(bool value, Func<bool> action, string message)
+    {
+        if (!value && !action())
+            throw new ArgumentException(message);
+    }
+
+    public static void Argument(Func<bool> action, string message)
+    {
+        if (!action())
             throw new ArgumentException(message);
     }
 
@@ -114,40 +139,40 @@ public static class Verify
         if (value < T.Zero) action(value);
     }
 
-    public static void Range<T>(T value, T min, T max, string? arg = null) where T : INumber<T>
+    public static void Range<T>(T value, T min, T max, string? message = null) where T : INumber<T>
     {
         if (!TryClamp(value, min, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Range<T>(T value, T max, string? arg = null) where T : INumber<T>
+    public static void Range<T>(T value, T max, string? message = null) where T : INumber<T>
     {
         if (!TryClamp(value, T.Zero, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void RangeArray<T>(T value, T max, string? arg = null) where T : INumber<T>
+    public static void RangeArray<T>(T value, T max, string? message = null) where T : INumber<T>
     {
         if (!TryClamp(value, T.Zero, max - T.One))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Min<T>(T value, T min, string? arg = null) where T : INumber<T>
+    public static void Min<T>(T value, T min, string? message = null) where T : INumber<T>
     {
         if (value < min)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {min}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {min}.");
     }
 
-    public static void Max<T>(T value, T min, string? arg = null) where T : INumber<T>
+    public static void Max<T>(T value, T min, string? message = null) where T : INumber<T>
     {
         if (value > min)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {min}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {min}.");
     }
 
-    public static void MoreThanZero<T>(T value, string? arg = null) where T : INumber<T>
+    public static void MoreThanZero<T>(T value, string? message = null) where T : INumber<T>
     {
         if (value < T.Zero)
-            throw new ArgumentOutOfRangeException(arg ?? "Value cant be less than zero.");
+            throw new ArgumentOutOfRangeException(message ?? "Value cant be less than zero.");
     }
 
 
@@ -157,100 +182,100 @@ public static class Verify
 
     #region Exceptions6.0
 
-    public static void Range(int value, int min, int max, string? arg = null)
+    public static void Range(int value, int min, int max, string? message = null)
     {
         if (!TryClamp(value, min, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Range(float value, float min, float max, string? arg = null)
+    public static void Range(float value, float min, float max, string? message = null)
     {
         if (!TryClamp(value, min, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Range(double value, double min, double max, string? arg = null)
+    public static void Range(double value, double min, double max, string? message = null)
     {
         if (!TryClamp(value, min, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Range(int value, int max, string? arg = null)
+    public static void Range(int value, int max, string? message = null)
     {
         if (!TryClamp(value, 0, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Range(double value, double max, string? arg = null)
+    public static void Range(double value, double max, string? message = null)
     {
         if (!TryClamp(value, 0, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Range(float value, float max, string? arg = null)
+    public static void Range(float value, float max, string? message = null)
     {
         if (!TryClamp(value, 0, max))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void RangeArray(int value, int max, string? arg = null)
+    public static void RangeArray(int value, int max, string? message = null)
     {
         if (!TryClamp(value, 0, max - 1))
-            throw new ArgumentOutOfRangeException(arg);
+            throw new ArgumentOutOfRangeException(message);
     }
 
-    public static void Min(int value, int min, string? arg = null)
+    public static void Min(int value, int min, string? message = null)
     {
         if (value < min)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {min}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {min}.");
     }
 
-    public static void Min(float value, float min, string? arg = null)
+    public static void Min(float value, float min, string? message = null)
     {
         if (value < min)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {min}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {min}.");
     }
 
-    public static void Min(double value, double min, string? arg = null)
+    public static void Min(double value, double min, string? message = null)
     {
         if (value < min)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {min}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {min}.");
     }
 
-    public static void Max(int value, int max, string? arg = null)
+    public static void Max(int value, int max, string? message = null)
     {
         if (value > max)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {max}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {max}.");
     }
 
-    public static void Max(float value, float max, string? arg = null)
+    public static void Max(float value, float max, string? message = null)
     {
         if (value > max)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {max}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {max}.");
     }
 
-    public static void Max(double value, double max, string? arg = null)
+    public static void Max(double value, double max, string? message = null)
     {
         if (value > max)
-            throw new ArgumentOutOfRangeException(arg ?? $"Value cant be less than {max}.");
+            throw new ArgumentOutOfRangeException(message ?? $"Value cant be less than {max}.");
     }
 
-    public static void MoreThanZero(int value, string? arg = null)
+    public static void MoreThanZero(int value, string? message = null)
     {
         if (value < 0)
-            throw new ArgumentOutOfRangeException(arg ?? "Value cant be less than zero.");
+            throw new ArgumentOutOfRangeException(message ?? "Value cant be less than zero.");
     }
 
-    public static void MoreThanZero(float value, string? arg = null)
+    public static void MoreThanZero(float value, string? message = null)
     {
         if (value < 0)
-            throw new ArgumentOutOfRangeException(arg ?? "Value cant be less than zero.");
+            throw new ArgumentOutOfRangeException(message ?? "Value cant be less than zero.");
     }
 
-    public static void MoreThanZero(double value, string? arg = null)
+    public static void MoreThanZero(double value, string? message = null)
     {
         if (value < 0)
-            throw new ArgumentOutOfRangeException(arg ?? "Value cant be less than zero.");
+            throw new ArgumentOutOfRangeException(message ?? "Value cant be less than zero.");
     }
 
     #endregion

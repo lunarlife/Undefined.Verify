@@ -4,7 +4,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
-        <Version>1.0.3</Version>
+        <Version>1.0.4</Version>
         <Title>Verify</Title>
         <Description>Just a small util for sending errors.</Description>
         <Copyright>Copyright © LunarLife 2023</Copyright>
