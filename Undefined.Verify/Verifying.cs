@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace Undefined.Verify;
 
-public static class Verify
+public static class Verifying
 {
     public static void RangeArray(Array array, int index, string? message = null)
     {
@@ -32,9 +32,9 @@ public static class Verify
             action();
     }
 
-    public static void Argument(bool value, Func<bool> action, string message)
+    public static void Argument(bool value, Func<bool> func, string message)
     {
-        if (!value && !action())
+        if (!value && !func())
             throw new ArgumentException(message);
     }
 
