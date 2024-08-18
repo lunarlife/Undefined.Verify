@@ -22,8 +22,7 @@ public static partial class Verify
         , INumber<T>
 #endif
     {
-        var result = new NonNegativeResult<T>(isPassed, value);
-        resultAction?.Invoke(result);
+        resultAction?.Invoke(new NonNegativeResult<T>(isPassed, value));
         if (!isPassed)
             throw new NonNegativeException(value, message);
     }
@@ -50,7 +49,6 @@ public static partial class Verify
 
     public static void ThrowNonNegative(long value, string? message = null) =>
         throw new NonNegativeException(value, message);
-
 
     public static void ThrowNonNegative(float value, string? message = null) =>
         throw new NonNegativeException(value, message);

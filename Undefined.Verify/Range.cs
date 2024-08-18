@@ -28,20 +28,17 @@ public static partial class Verify
     }
 
 
-    public static void
-        Range(int value, int min, int max, string? message = null, RangeVerifyAction<int>? action = null) =>
+    public static void Range(int value, int min, int max, string? message = null,
+        RangeVerifyAction<int>? action = null) =>
         RangeInternal(TryClamp(value, min, max), value, min, max, message, action);
 
-    public static void
-        Range(uint value, uint min, uint max, string? message = null, RangeVerifyAction<uint>? action = null) =>
+    public static void Range(uint value, uint min, uint max, string? message = null, RangeVerifyAction<uint>? action = null) =>
         RangeInternal(TryClamp(value, min, max), value, min, max, message, action);
 
-    public static void
-        Range(long value, long min, long max, string? message = null, RangeVerifyAction<long>? action = null) =>
+    public static void Range(long value, long min, long max, string? message = null, RangeVerifyAction<long>? action = null) =>
         RangeInternal(TryClamp(value, min, max), value, min, max, message, action);
 
-    public static void
-        Range(ulong value, ulong min, ulong max, string? message = null, RangeVerifyAction<ulong>? action = null) =>
+    public static void Range(ulong value, ulong min, ulong max, string? message = null, RangeVerifyAction<ulong>? action = null) =>
         RangeInternal(TryClamp(value, min, max), value, min, max, message, action);
 
     public static void Range(float value, float min, float max, string? message = null,

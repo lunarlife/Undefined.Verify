@@ -41,8 +41,8 @@ public class Tests
     public void ArrayTest()
     {
         float[] array = [1, 2, 3, 4, 5, 6];
-        Assert.Catch<ArrayRangeException>(() => TryArray(array, 6));
-        Assert.Catch<ArrayRangeException>(() => TryArray(array, -1));
+        Assert.Catch<ArrayIndexException>(() => TryArray(array, 6));
+        Assert.Catch<ArrayIndexException>(() => TryArray(array, -1));
         TryArray(array, 0);
         TryArray(array, 3);
         TryArray(array, array.Length - 1);

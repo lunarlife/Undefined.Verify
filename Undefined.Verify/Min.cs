@@ -22,8 +22,7 @@ public static partial class Verify
         , INumber<T>
 #endif
     {
-        var minResult = new MinResult<T>(isPassed, value, min);
-        resultAction?.Invoke(minResult);
+        resultAction?.Invoke(new MinResult<T>(isPassed, value, min));
         if (!isPassed)
             throw new MinimumValueException(value, min, message);
     }
@@ -51,31 +50,6 @@ public static partial class Verify
     public static void Min(double value, double min, string? message = null,
         MinVerifyAction<double>? resultAction = null) =>
         MinInternal(value, min, message, resultAction, value < min);
-
-
-    public static void MinOne(int value, string? message = null,
-        MinVerifyAction<int>? resultAction = null) =>
-        MinInternal(value, 1, message, resultAction, value < 1);
-
-    public static void MinOne(uint value, string? message = null,
-        MinVerifyAction<uint>? resultAction = null) =>
-        MinInternal(value, 1u, message, resultAction, value < 1u);
-
-    public static void MinOne(long value, string? message = null,
-        MinVerifyAction<long>? resultAction = null) =>
-        MinInternal(value, 1L, message, resultAction, value < 1L);
-
-    public static void MinOne(ulong value, string? message = null,
-        MinVerifyAction<ulong>? resultAction = null) =>
-        MinInternal(value, 1ul, message, resultAction, value < 1ul);
-
-    public static void MinOne(float value, string? message = null,
-        MinVerifyAction<float>? resultAction = null) =>
-        MinInternal(value, 1f, message, resultAction, value < 1f);
-
-    public static void MinOne(double value, string? message = null,
-        MinVerifyAction<double>? resultAction = null) =>
-        MinInternal(value, 1d, message, resultAction, value < 1d);
 
 
     public static void ThrowMin(int value, int min, string? message = null) =>
