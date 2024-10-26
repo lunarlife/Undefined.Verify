@@ -42,7 +42,7 @@ public static partial class Verify
                 $"Start index {start} is out of array length (Length: {arrayLength}). {message}");
         }
 
-        if (!TryClamp(end, 0, arrayLength - 1))
+        if (!TryClamp(end, 0, arrayLength))
         {
             resultAction?.Invoke(new ArrayRangeResult(false, start, end, arrayLength));
             throw new ArrayRangeException(
