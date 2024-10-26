@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Numerics;
 using Undefined.Verifying.Exceptions;
 using Undefined.Verifying.Results;
@@ -13,7 +12,7 @@ public delegate void MinVerifyAction<T>(MinResult<T> resultAction) where T : str
 
 public static partial class Verify
 {
-#if !NETSTANDARD
+#if NEW_FEATURES
     [StackTraceHidden]
 #endif
     private static void MinInternal<T>(T value, T min, string? message, MinVerifyAction<T>? resultAction,

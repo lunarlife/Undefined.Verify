@@ -1,0 +1,4 @@
+#if !NETSTANDARD && !NETCOREAPP
+#define NEW_FEATURES
+#endif
+

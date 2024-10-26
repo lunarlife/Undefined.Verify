@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Numerics;
 using Undefined.Verifying.Exceptions;
 using Undefined.Verifying.Results;
@@ -13,7 +12,7 @@ public delegate void RangeVerifyAction<T>(RangeResult<T> result) where T : struc
 
 public static partial class Verify
 {
-#if !NETSTANDARD
+#if NEW_FEATURES
     [StackTraceHidden]
 #endif
     private static void RangeInternal<T>(bool isPassed, T value, T min, T max, string? message,

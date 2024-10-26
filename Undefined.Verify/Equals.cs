@@ -49,6 +49,17 @@ public static partial class Verify
 
     public static void Equals<T>(T? value1, T? value2, string? message = null) =>
         Equals((object?)value1, value2, message);
+    
+    public static void EqualsOrNull(object? value1, object? value2, string? message = null)
+    {
+        if(value1 is null || value2 is null) return;
+        if (ReferenceEquals(value1, value2)) return;
+        if (value1.Equals(value2)) return;
+        throw new NotEqualsException(message);
+    }
+
+    public static void EqualsOrNull<T>(T? value1, T? value2, string? message = null) =>
+        Equals((object?)value1, value2, message);
 
     public static void Equals<T>(T? value1, T? value2, string? message = null) where T : struct
     {
@@ -73,11 +84,17 @@ public static partial class Verify
         if (value1 is null || !value1.Equals(value2)) return;
         throw new EqualsException(message);
     }
-    
+
     public static void VerifyEquals<T, T1>(this T? value1, T1? value2, string? message = null) =>
         Equals(value1, value2, message);
 
     public static void VerifyEquals<T>(this T? value1, T? value2, string? message = null) where T : struct =>
+        Equals(value1, value2, message);
+
+    public static void VerifyEqualsOrNull<T, T1>(this T? value1, T1? value2, string? message = null) =>
+        Equals(value1, value2, message);
+
+    public static void VerifyEqualsOrNull<T>(this T? value1, T? value2, string? message = null) where T : struct =>
         Equals(value1, value2, message);
 
     public static void VerifyNotEquals<T, T1>(this T? value1, T1? value2, string? message = null) =>

@@ -13,6 +13,7 @@ public static partial class Verify
     public static void Array(int index, int arrayLength, string? message = null,
         ArrayIndexVerifyAction? resultAction = null)
     {
+        Positive(index);
         Positive(arrayLength);
         var isPassed = TryClamp(index, 0, arrayLength - 1);
         resultAction?.Invoke(new ArrayIndexResult(isPassed, index, arrayLength));
@@ -35,14 +36,14 @@ public static partial class Verify
             throw new ArrayRangeException($"Array length cant be less than 0. {message}");
         }
 
-        if (TryClamp(start, 0, arrayLength - 1))
+        if (TryClamp(start, 0, arrayLength))
         {
             resultAction?.Invoke(new ArrayRangeResult(false, start, end, arrayLength));
             throw new ArrayRangeException(
                 $"Start index {start} is out of array length (Length: {arrayLength}). {message}");
         }
 
-        if (TryClamp(end, 0, arrayLength - 1))
+        if (TryClamp(end, 0, arrayLength))
         {
             resultAction?.Invoke(new ArrayRangeResult(false, start, end, arrayLength));
             throw new ArrayRangeException(

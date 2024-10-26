@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Undefined.Verifying.Exceptions;
 
 namespace Undefined.Verifying;
@@ -7,7 +6,7 @@ public delegate void ArgumentVerifyAction(bool isPassed);
 
 public static partial class Verify
 {
-#if !NETSTANDARD
+#if NEW_FEATURES
     [StackTraceHidden]
 #endif
     private static void ArgumentInternal(bool value, string? message, Func<bool>? additionalTest, Action? passedAction,

@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Numerics;
 using Undefined.Verifying.Exceptions;
 using Undefined.Verifying.Results;
@@ -13,7 +12,7 @@ public delegate void NonNegativeVerifyAction<T>(NonNegativeResult<T> resultActio
 
 public static partial class Verify
 {
-#if !NETSTANDARD
+#if NEW_FEATURES
     [StackTraceHidden]
 #endif
     private static void NonNegativeInternal<T>(T value, string? message, NonNegativeVerifyAction<T>? resultAction,

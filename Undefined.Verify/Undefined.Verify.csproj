@@ -14,7 +14,7 @@
         <RepositoryUrl>https://github.com/lunarlife/Undefined.Verify</RepositoryUrl>
         <RepositoryType>https://github.com/lunarlife/Undefined.Verify</RepositoryType>
         <PackageTags>events event undefined</PackageTags>
-        <TargetFrameworks>net7.0;net8.0;net9.0;netstandard2.1;net6.0</TargetFrameworks>
+        <TargetFrameworks>net6.0;net7.0;net8.0;net9.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <RootNamespace>Undefined.Verifying</RootNamespace>
     </PropertyGroup>
