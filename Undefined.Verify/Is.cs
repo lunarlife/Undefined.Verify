@@ -4,11 +4,15 @@ namespace Undefined.Verifying;
 
 public static partial class Verify
 {
-    public static void Is<T>(this object value, string? message = null) => Is(value, typeof(T), message);
+    public static T Is<T>(this object value, string? message = null)
+    {
+        return (T)Is(value, typeof(T), message);
+    }
 
-    public static void Is(this object value, Type type, string? message = null)
+    public static object Is(this object value, Type type, string? message = null)
     {
         if (value.GetType() != type) throw new IsNotException(value.GetType(), type, message);
+        return value;
     }
 
 
@@ -33,11 +37,12 @@ public static partial class Verify
         if (value.GetType() == type) throw new IsException(type, message);
     }
 
-    public static void InstanceOf<T>(this object value, string? message = null) =>
-        InstanceOf(value, typeof(T), message);
+    public static T InstanceOf<T>(this object value, string? message = null) =>
+        (T)InstanceOf(value, typeof(T), message);
 
-    public static void InstanceOf(this object value, Type type, string? message = null)
+    public static object InstanceOf(this object value, Type type, string? message = null)
     {
         if (type.IsInstanceOfType(value)) throw new NotInstanceOfException(value.GetType(), type, message);
+        return value;
     }
 }
