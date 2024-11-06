@@ -44,7 +44,7 @@ public static partial class Verify
     {
         if (ReferenceEquals(value1, value2)) return;
         if (value1 is not null && value1.Equals(value2)) return;
-        throw new NotEqualsException(message);
+        throw new NotEqualsException(value1, value2, message);
     }
 
     public static void Equals<T>(T? value1, T? value2, string? message = null) =>
@@ -55,7 +55,7 @@ public static partial class Verify
         if(value1 is null || value2 is null) return;
         if (ReferenceEquals(value1, value2)) return;
         if (value1.Equals(value2)) return;
-        throw new NotEqualsException(message);
+        throw new NotEqualsException(value1, value2, message);
     }
 
     public static void EqualsOrNull<T>(T? value1, T? value2, string? message = null) =>
@@ -65,14 +65,14 @@ public static partial class Verify
     {
         if (value1.HasValue == value2.HasValue) return;
         if (value1 is not null && value1.Equals(value2)) return;
-        throw new NotEqualsException(message);
+        throw new NotEqualsException(value1, value2, message);
     }
 
     public static void NotEquals(object? value1, object? value2, string? message = null)
     {
         if (!ReferenceEquals(value1, value2)) return;
         if (value1 is null || !value1.Equals(value2)) return;
-        throw new EqualsException(message);
+        throw new EqualsException(value1, value2, message);
     }
 
     public static void NotEquals<T>(T? value1, T? value2, string? message = null) =>
@@ -82,7 +82,7 @@ public static partial class Verify
     {
         if (value1.HasValue != value2.HasValue) return;
         if (value1 is null || !value1.Equals(value2)) return;
-        throw new EqualsException(message);
+        throw new EqualsException(value1, value2, message);
     }
 
     public static void VerifyEquals<T, T1>(this T? value1, T1? value2, string? message = null) =>

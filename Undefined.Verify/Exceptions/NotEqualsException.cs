@@ -2,7 +2,7 @@ namespace Undefined.Verifying.Exceptions;
 
 public class NotEqualsException : Exception
 {
-    public NotEqualsException(string? message) : base($"Objects are not equals. {message}")
+    public NotEqualsException(object? first, object? second, string? message) : base($"{first} is not equal to {second}. {message}")
     {
     }
 }

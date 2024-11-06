@@ -2,7 +2,7 @@ namespace Undefined.Verifying.Exceptions;
 
 public class EqualsException : Exception
 {
-    public EqualsException(string? message) : base($"Objects must not be equal. {message}")
+    public EqualsException(object? first, object? second, string? message) : base($"{first} is equal to {second}. {message}")
     {
     }
 }
