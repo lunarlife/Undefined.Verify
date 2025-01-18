@@ -28,27 +28,27 @@ public static partial class Verify
 
     public static void Positive(int value, string? message = null,
         PositiveVerifyAction<int>? resultAction = null) =>
-        PositiveInternal(value, message, resultAction, value > 1);
+        PositiveInternal(value, message, resultAction, value > 0);
 
     public static void Positive(uint value, string? message = null,
         PositiveVerifyAction<uint>? resultAction = null) =>
-        PositiveInternal(value, message, resultAction, value > 1u);
+        PositiveInternal(value, message, resultAction, value > 0u);
 
     public static void Positive(long value, string? message = null,
         PositiveVerifyAction<long>? resultAction = null) =>
-        PositiveInternal(value, message, resultAction, value > 1L);
+        PositiveInternal(value, message, resultAction, value > 0L);
 
     public static void Positive(ulong value, string? message = null,
         PositiveVerifyAction<ulong>? resultAction = null) =>
-        PositiveInternal(value, message, resultAction, value > 1ul);
+        PositiveInternal(value, message, resultAction, value > 0ul);
 
     public static void Positive(float value, string? message = null,
         PositiveVerifyAction<float>? resultAction = null) =>
-        PositiveInternal(value, message, resultAction, value > 1f);
+        PositiveInternal(value, message, resultAction, value > 0f);
 
     public static void Positive(double value, string? message = null,
         PositiveVerifyAction<double>? resultAction = null) =>
-        PositiveInternal(value, message, resultAction, value > 1d);
+        PositiveInternal(value, message, resultAction, value > 0d);
 
     public static void ThrowPositive(int value, string? message = null) =>
         throw new PositiveException(value, message);

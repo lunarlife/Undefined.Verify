@@ -4,15 +4,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
-        <Version>3.2.1</Version>
+        <Version>3.3.0</Version>
         <Title>Verify</Title>
         <Description>Just a small util for sending errors.</Description>
-        <Copyright>Copyright © LunarLife 2024</Copyright>
+        <Copyright>Copyright © LunarLife 2025</Copyright>
         <PackageProjectUrl>https://github.com/lunarlife/Undefined.Verify</PackageProjectUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/lunarlife/Undefined.Verify</RepositoryUrl>
-        <RepositoryType>https://github.com/lunarlife/Undefined.Verify</RepositoryType>
+        <RepositoryType>github</RepositoryType>
         <PackageTags>events event undefined</PackageTags>
         <TargetFrameworks>net6.0;net7.0;net8.0;net9.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
