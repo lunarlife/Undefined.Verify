@@ -28,27 +28,27 @@ public static partial class Verify
 
     public static void Min(int value, int min, string? message = null,
         MinVerifyAction<int>? resultAction = null) =>
-        MinInternal(value, min, message, resultAction, value < min);
+        MinInternal(value, min, message, resultAction, value >= min);
 
     public static void Min(uint value, uint min, string? message = null,
         MinVerifyAction<uint>? resultAction = null) =>
-        MinInternal(value, min, message, resultAction, value < min);
+        MinInternal(value, min, message, resultAction, value >= min);
 
     public static void Min(long value, long min, string? message = null,
         MinVerifyAction<long>? resultAction = null) =>
-        MinInternal(value, min, message, resultAction, value < min);
+        MinInternal(value, min, message, resultAction, value >= min);
 
     public static void Min(ulong value, ulong min, string? message = null,
         MinVerifyAction<ulong>? resultAction = null) =>
-        MinInternal(value, min, message, resultAction, value < min);
+        MinInternal(value, min, message, resultAction, value >= min);
 
     public static void Min(float value, float min, string? message = null,
         MinVerifyAction<float>? resultAction = null) =>
-        MinInternal(value, min, message, resultAction, value < min);
+        MinInternal(value, min, message, resultAction, value >= min);
 
     public static void Min(double value, double min, string? message = null,
         MinVerifyAction<double>? resultAction = null) =>
-        MinInternal(value, min, message, resultAction, value < min);
+        MinInternal(value, min, message, resultAction, value >= min);
 
 
     public static void ThrowMin(int value, int min, string? message = null) =>
@@ -76,6 +76,6 @@ public static partial class Verify
 
     public static void Min<T>(T value, T min, string? message = null, MinVerifyAction<T>? resultAction = null)
         where T : struct, INumber<T> =>
-        MinInternal(value, min, message, resultAction, value < min);
+        MinInternal(value, min, message, resultAction, value >= min);
 #endif
 }
